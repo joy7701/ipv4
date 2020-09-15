@@ -36,6 +36,19 @@ public:
 		return sstr.str();
 	}
 
+	ipv4& operator++()
+	{
+		*this = ipv4(1 + to_ulong());
+		return *this;
+	}
+
+	ipv4& operator++(int)
+	{
+		ipv4 result(*this);
+		++(*this);
+		return *this;
+	}
+
 	friend std::ostream& operator<<(std::ostream& os, const ipv4& a)
 	{
 		// casting to int to see the ip adress in numeric representation
@@ -55,5 +68,35 @@ public:
 		else
 			is.setstate(std::ios_base::failbit);
 		return is;
+	}
+
+	friend bool operator==(const ipv4& a, const ipv4& b) noexcept
+	{
+		return a.data == b.data;
+	}
+
+	friend bool operator!=(const ipv4& a, const ipv4& b) noexcept
+	{
+		return !(a == b);
+	}
+
+	friend bool operator<(const ipv4& a, const ipv4& b) noexcept
+	{
+		return a.to_ulong() < b.to_ulong();
+	}
+
+	friend bool operator>(const ipv4& a, const ipv4& b) noexcept
+	{
+		return b < a;
+	}
+
+	friend bool operator<=(const ipv4& a, const ipv4& b) noexcept
+	{
+		return !(a > b);
+	}
+
+	friend bool operator>=(const ipv4& a, const ipv4& b) noexcept
+	{
+		return !(a < b);
 	}
 };

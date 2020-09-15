@@ -3,13 +3,14 @@
 int main()
 {
 	ipv4 a{};
-	unsigned long number;
-	std::cin >> a;
+	ipv4 b{};
+	std::cin >> a >> b;
 	if (!std::cin.fail())
 	{
-		std::cout << "Entered ip: " << a << std::endl;
-		std::cout << "Actual number: " << a.to_ulong() << std::endl;
-		std::cout << a.to_string() << std::endl;
+		for (ipv4 current = a; current <= b; current++)
+		{
+			std::cout << current << std::endl;
+		}
 	}
 	else
 	{
